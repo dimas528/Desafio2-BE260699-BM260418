@@ -114,3 +114,18 @@ void Jugar()
     if (respuesta == "s")
         Jugar();
 }
+
+// Función para dibujar el ahorcado
+void DibujarAhorcado(int intentos)
+{
+    string[] dibujo = {
+        " +---+\n |   |\n O   |\n/|\\  |\n/ \\  |\n     |\n=======",
+        " +---+\n |   |\n O   |\n/|\\  |\n/    |\n     |\n=======",
+        " +---+\n |   |\n O   |\n/|\\  |\n     |\n     |\n=======",
+        " +---+\n |   |\n O   |\n/|   |\n     |\n     |\n=======",
+        " +---+\n |   |\n O   |\n |   |\n     |\n     |\n=======",
+        " +---+\n |   |\n O   |\n     |\n     |\n     |\n=======",
+        " +---+\n |   |\n     |\n     |\n     |\n     |\n======="
+    };
+    Console.WriteLine(dibujo[6 - intentos]);
+}
