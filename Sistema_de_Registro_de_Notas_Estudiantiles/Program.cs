@@ -49,6 +49,17 @@ namespace Sistema_de_Registro_de_Notas_Estudiantiles
                     }
                 } while (!valido);
             }
+            //mostramos el informe para cada estudiante
+            for (int i=0; i<notas.Length;i++)
+            {
+                Console.WriteLine("Reporte Final");
+                Console.WriteLine($"Estudiante: {alumnos[i]}");
+                Console.WriteLine($"Tu nota es: {notas[i]}");
+                Console.WriteLine($"La cual refiere en formato alfabetico a: {letras(notas[i])}");
+                Console.WriteLine($"Tu estado academico es: {paso(notas[i])} ");
+
+
+            }
             //evitamos que el programa se cierre solo 
             Console.ReadKey();
             
@@ -97,13 +108,45 @@ namespace Sistema_de_Registro_de_Notas_Estudiantiles
             {
                 if (v[i] >= 6.0)
                 {
-                    Console.WriteLine("aprobo");
+                    Console.WriteLine("aprobado");
                 }
                 else
                 {
-                    Console.WriteLine("reprobo");
+                    Console.WriteLine("reprobado");
                 }
             }
-        } 
+        }
+        //procedimiento para pasar notas de numeros a letras
+        static void letras(double[] v)
+        {
+            for (int i = 0; i < v.Length; i++)
+            {
+                //A=9-10, B=8-8.9, C=7-7.9, D=6-6.9, F=0-5.9
+                if (v[i]>=9)
+                {
+                    Console.WriteLine("A");
+                }
+                else if(v[i] >= 8 && v[i]<9)
+                {
+                    Console.WriteLine("B");
+
+                }
+                else if (v[i] >= 7 && v[i] < 8)
+                {
+                    Console.WriteLine("C");
+
+                }
+                else if (v[i] >= 6 && v[i] < 7)
+                {
+                    Console.WriteLine("D");
+
+                }
+                else if (v[i] >= 0 && v[i] < 6)
+                {
+                    Console.WriteLine("F");
+
+                }
+            }
+        }
     }
 }
