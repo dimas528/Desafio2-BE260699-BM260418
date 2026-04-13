@@ -14,10 +14,11 @@ namespace Sistema_de_Registro_de_Notas_Estudiantiles
             //definimos variables
             int n = 0;
             bool valido;
-            
+            int reprobados=0;
+            int aprobados = 0;
             //pedimos el numero de estudiantes
-            Console.WriteLine("Bienvenido al sistema de registro de notas");
-            Console.WriteLine("Ingrese la cantidad de estudiantes");
+            Console.WriteLine("Bienvenido al sistema de registro de notas:");
+            Console.WriteLine("Ingrese la cantidad de estudiantes:");
             n = int.Parse(Console.ReadLine());
 
             //definimos vectores
@@ -49,20 +50,44 @@ namespace Sistema_de_Registro_de_Notas_Estudiantiles
                     }
                 } while (!valido);
             }
+            Console.Clear();
             //mostramos el informe para cada estudiante
-            for (int i=0; i<notas.Length;i++)
+            Console.WriteLine("Reporte Academico");
+            for (int i = 0; i < n; i++)
             {
-                Console.WriteLine("Reporte Final");
+                Console.WriteLine("\n");
                 Console.WriteLine($"Estudiante: {alumnos[i]}");
                 Console.WriteLine($"Tu nota es: {notas[i]}");
                 Console.WriteLine($"La cual refiere en formato alfabetico a: {letras(notas[i])}");
-                Console.WriteLine($"Tu estado academico es: {paso(notas[i])} ");
-
+                
+                Console.WriteLine($"Tu estado academico es: {paso(notas[i]) }");
+                Console.WriteLine("----------------------");
+                Console.WriteLine("\n");
 
             }
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("Resumen Final");
+            for(int i = 0; i < n; i++)
+            {
+                if (notas[i] < 6)
+                {
+                    reprobados += 1;
+                }
+                if (notas[i] >= 6)
+                {
+                    aprobados += 1;
+                }
+            }
+            Console.WriteLine("Total aprobados: "+ aprobados);
+            Console.WriteLine("Total reprobados: " + reprobados);
+            Console.WriteLine("Promedio general: " + promedio(notas));
+            Console.WriteLine("Nota mayor: " + mayor(notas));
+            Console.WriteLine("Nota menor: " + menor(notas));
+
             //evitamos que el programa se cierre solo 
             Console.ReadKey();
-            
+
         }
         //creamos funciones para calcular el promedio, la nota mayor y menor 
         static double promedio(double[] vector) 
@@ -101,52 +126,47 @@ namespace Sistema_de_Registro_de_Notas_Estudiantiles
             }
             return min;
         }
-        //creamos un procedimiento para ver si el estudiante aprobo
-        static void paso(double[] v)
+        //pasomos el procedimeinto a funcion; funcion para ver si el estudiante aprobo
+        static string paso(double v)
         {
-            for (int i = 0; i < v.Length; i++)
-            {
-                if (v[i] >= 6.0)
+                if (v >= 6.0)
                 {
-                    Console.WriteLine("aprobado");
+                    string estado = "aprobado";
+                    return estado;
                 }
                 else
                 {
-                    Console.WriteLine("reprobado");
-                }
+                    string estado = "reprobado";
+                    return estado;
             }
+            
         }
-        //procedimiento para pasar notas de numeros a letras
-        static void letras(double[] v)
+        //pasomos el procedimeinto a funcion; funcion para pasar notas de numeros a letras
+        static string letras(double v)
         {
-            for (int i = 0; i < v.Length; i++)
-            {
+            
                 //A=9-10, B=8-8.9, C=7-7.9, D=6-6.9, F=0-5.9
-                if (v[i]>=9)
+                if (v>=9)
                 {
-                    Console.WriteLine("A");
+                return "A";
                 }
-                else if(v[i] >= 8 && v[i]<9)
+                else if(v >= 8 && v<9)
                 {
-                    Console.WriteLine("B");
-
+                return "B";
                 }
-                else if (v[i] >= 7 && v[i] < 8)
+                else if (v >= 7 && v < 8)
                 {
-                    Console.WriteLine("C");
-
+                return "C";
                 }
-                else if (v[i] >= 6 && v[i] < 7)
+                else if (v >= 6 && v < 7)
                 {
-                    Console.WriteLine("D");
-
+                return "D";
                 }
-                else if (v[i] >= 0 && v[i] < 6)
+                else if (v>= 0 && v < 6)
                 {
-                    Console.WriteLine("F");
-
+                return "F";
                 }
-            }
+            return "error";
         }
     }
 }
